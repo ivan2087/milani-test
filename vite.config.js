@@ -7,13 +7,13 @@ export default defineConfig({
   server: {
     proxy: {
       "/graphql": {
-        target: "https://nmilani.local",
+        target: "https://cms.milani.ca",
         changeOrigin: true,
         secure: false,
       },
 
       "/wp-ajax": {
-        target: "https://nmilani.local",
+        target: "https://cms.milani.ca",
         changeOrigin: true,
         secure: false,
         rewrite: () => "/wp-admin/admin-ajax.php",
