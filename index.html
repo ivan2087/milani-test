@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Preload splash logo → garantiza FCP rápido sin esperar JS -->
+    <link rel="preload" as="image" href="/logo-milani.svg" fetchpriority="high" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+
+    <title>Milani plumbing heating & air conditioning</title>
+
+    <style id="critical-css">
+      #milani-splash {
+        position: fixed;
+        inset: 0;
+        background: #ce2229;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+      }
+
+      #milani-splash.fade-out {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      #milani-splash img {
+        width: 370px;
+        max-width: 60vw;
+        height: auto;
+        display: block;
+      }
+
+      .header {
+        min-height: 60px;
+      }
+
+      .header-below {
+        min-height: 80px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//cms.milani.ca" />
+    <link rel="dns-prefetch" href="//milani.xpress.ws" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cms.milani.ca" crossorigin />
+    <link rel="preconnect" href="https://milani.xpress.ws" crossorigin />
+
+    <!-- Google Fonts non-blocking — cargados aquí para evitar bloqueo de render -->
+    <link rel="preload" as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap">
+    <link rel="preload" as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap">
+    </noscript>
+  </head>
+
+  <body>
+    <!-- PERF TEST: GTM noscript desactivado temporalmente
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NPT9BLG"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    -->
+
+    <div id="milani-splash" aria-hidden="true">
+      <img src="/logo-milani.svg" alt="Milani" />
+    </div>
+
+    <div id="root"></div>
+
+    <script>
+      (function () {
+        var splash = document.getElementById("milani-splash");
+        if (!splash) return;
+
+        var removed = false;
+
+        function removeSplash() {
+          if (!splash || removed) return;
+          removed = true;
+          splash.classList.add("fade-out");
+
+          setTimeout(function () {
+            if (splash && splash.parentNode) {
+              splash.parentNode.removeChild(splash);
+            }
+          }, 220);
+        }
+
+        window.__milaniFadeOutSplash = function () {
+          removeSplash();
+          window.__milaniFadeOutSplash = null;
+        };
+
+        window.addEventListener("pageshow", removeSplash, { once: true });
+        document.addEventListener("DOMContentLoaded", function () {
+          setTimeout(removeSplash, 900);
+        }, { once: true });
+
+        setTimeout(function () {
+          if (typeof window.__milaniFadeOutSplash === "function") {
+            window.__milaniFadeOutSplash();
+          } else {
+            removeSplash();
+          }
+        }, 1200);
+
+        setTimeout(removeSplash, 1200);
+      })();
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+      async
+    ></script>
+
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- PERF TEST: GTM desactivado temporalmente
+    <script>
+      (function () {
+        function loadGTM() {
+          if (window.__MILANI_GTM_LOADED__) return;
+          window.__MILANI_GTM_LOADED__ = true;
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+            var f = d.getElementsByTagName(s)[0], j = d.createElement(s),
+              dl = l !== "dataLayer" ? "&l=" + l : "";
+            j.async = true;
+            j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, "script", "dataLayer", "GTM-NPT9BLG");
+        }
+        function scheduleGTM() {
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(function () { setTimeout(loadGTM, 3000); }, { timeout: 5000 });
+          } else { setTimeout(loadGTM, 3500); }
+        }
+        window.addEventListener("load", scheduleGTM, { once: true });
+      })();
+    </script>
+    -->
+
+    <!-- PERF TEST: Podium desactivado temporalmente
+    <script>
+      (function () {
+        function loadPodium() {
+          if (window.__MILANI_PODIUM_LOADED__) return;
+          window.__MILANI_PODIUM_LOADED__ = true;
+          var s = document.createElement("script");
+          s.src = "https://connect.podium.com/widget.js#ORG_TOKEN=8f43d2d0-a0da-43ab-a8b5-678e16daf0d6";
+          s.defer = true; s.id = "podium-widget";
+          s.setAttribute("data-organization-api-token", "8f43d2d0-a0da-43ab-a8b5-678e16daf0d6");
+          document.body.appendChild(s);
+        }
+        function schedulePodium() {
+          var loaded = false, timeoutId = null;
+          function cleanup() {
+            window.removeEventListener("scroll", onTrigger);
+            window.removeEventListener("pointerdown", onTrigger);
+            window.removeEventListener("touchstart", onTrigger);
+            window.removeEventListener("keydown", onTrigger);
+            if (timeoutId) clearTimeout(timeoutId);
+          }
+          function onTrigger() {
+            if (loaded) return; loaded = true; cleanup(); setTimeout(loadPodium, 1200);
+          }
+          timeoutId = setTimeout(function () {
+            if (loaded) return; loaded = true; cleanup(); loadPodium();
+          }, 12000);
+          window.addEventListener("scroll", onTrigger, { passive: true, once: true });
+          window.addEventListener("pointerdown", onTrigger, { once: true });
+          window.addEventListener("touchstart", onTrigger, { passive: true, once: true });
+          window.addEventListener("keydown", onTrigger, { once: true });
+        }
+        window.addEventListener("load", schedulePodium, { once: true });
+      })();
+    </script>
+    -->
+  </body>
+</html>

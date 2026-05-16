@@ -1,0 +1,128 @@
+/* src/pages/category-template.css */
+
+.cat-page {
+  width: 100%;
+  padding: 36px 0 80px;
+}
+
+.cat-hero {
+  padding: 0 24px 26px;
+}
+.cat-hero  span{
+  padding-left: 0 !important;
+}
+.cat-hero__kicker {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.cat-hero__title {
+  font-size: clamp(44px, 6vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-weight: 800;
+  color: #0b0b0b;
+}
+
+.cat-grid {
+      padding: 42px 1px 10px;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 34px;
+}
+
+@media (min-width: 860px) {
+  .cat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 34px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 859px) {
+  .cat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px;
+  }
+}
+
+.cat-card {
+  min-width: 0;
+}
+
+.cat-card__mediaLink {
+  display: block;
+  text-decoration: none;
+}
+
+.cat-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #f3f3f3;
+}
+
+.cat-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cat-card__imgPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f1f1f1, #e7e7e7);
+}
+
+.cat-card__tag {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(4px);
+}
+
+.cat-card__meta {
+  margin-top: 18px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.cat-card__title {
+  margin: 10px 0 0;
+  font-size: 30px;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: #0b0b0b;
+}
+
+.cat-card__titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cat-card__titleLink:hover {
+  text-decoration: underline;
+}
+
+.cat-card__excerpt {
+  margin: 14px 0 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(0, 0, 0, 0.62);
+}

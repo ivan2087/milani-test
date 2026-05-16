@@ -1,0 +1,117 @@
+// src/hooks/useEmbedSocial.js
+import { useEffect } from "react";
+
+export function useEmbedSocial({ key, html, debug = true }) {
+  useEffect(() => {
+    let cancelled = false;
+    const selector = ".embedsocial-hashtag[data-ref]";
+    const SCRIPT_ID = "EmbedSocialHashtagScript";
+    const SRC = "https://embedsocial.com/cdn/ht.js";
+
+    const log = (...args) => debug && console.log(...args);
+    const warn = (...args) => debug && console.warn(...args);
+    const err = (...args) => debug && console.error(...args);
+
+    const ensureScript = () =>
+      new Promise((resolve, reject) => {
+        // si ya existe, ok
+        const existing = document.getElementById(SCRIPT_ID);
+        if (existing) {
+          log("ℹ️ [EmbedSocial] script ya existe");
+          return resolve();
+        }
+
+        const s = document.createElement("script");
+        s.id = SCRIPT_ID;
+        s.src = SRC;
+        s.async = true;
+
+        s.onload = () => {
+          log("✅ [EmbedSocial] script loaded:", SRC);
+          resolve();
+        };
+        s.onerror = (e) => {
+          err("❌ [EmbedSocial] script failed:", e);
+          reject(e);
+        };
+
+        document.head.appendChild(s);
+      });
+
+    const tryInit = async () => {
+      log("🟣 [EmbedSocial] tryInit", { key, hasHtml: !!html });
+
+      // esperar a que el HTML esté realmente pintado
+      let attempts = 0;
+      const max = 50; // ~5s (50*100ms)
+
+      while (!cancelled && attempts < max) {
+        const host = document.querySelector(selector);
+
+        if (host) {
+          log("✅ [EmbedSocial] host encontrado:", host, "data-ref:", host.getAttribute("data-ref"));
+
+          // observar si inyecta contenido
+          const obs = new MutationObserver(() => {
+            const hasIframe = !!host.querySelector("iframe");
+            const hasChildren = host.children.length > 0;
+            log("🧬 [EmbedSocial] mutation", { hasChildren, hasIframe, preview: host.innerHTML.slice(0, 120) });
+          });
+          obs.observe(host, { childList: true, subtree: true });
+
+          // cargar script (si falta)
+          try {
+            await ensureScript();
+          } catch {
+            obs.disconnect();
+            return;
+          }
+
+          // fallback SPA: forzar re-evaluación recargando el script si no renderiza en 1s
+          setTimeout(() => {
+            if (cancelled) return;
+
+            const hasIframe = !!host.querySelector("iframe");
+            const hasChildren = host.children.length > 0;
+
+            log("⏱️ [EmbedSocial] after 1s", { hasChildren, hasIframe });
+
+            if (!hasIframe && !hasChildren) {
+              warn("⚠️ [EmbedSocial] script cargó pero no renderizó. Forzando reload (cache-bust).");
+
+              const old = document.getElementById(SCRIPT_ID);
+              if (old) old.remove();
+
+              const s2 = document.createElement("script");
+              s2.id = SCRIPT_ID;
+              s2.src = `${SRC}?t=${Date.now()}`;
+              s2.async = true;
+              s2.onload = () => log("✅ [EmbedSocial] reload ok");
+              s2.onerror = (e) => err("❌ [EmbedSocial] reload fail", e);
+              document.head.appendChild(s2);
+            }
+          }, 1000);
+
+          // cleanup observer al cambiar página
+          return () => obs.disconnect();
+        }
+
+        attempts++;
+        await new Promise((r) => setTimeout(r, 100));
+      }
+
+      warn("⚠️ [EmbedSocial] no apareció el host en el DOM (timeout).");
+    };
+
+    let cleanupObs;
+    tryInit().then((cleanup) => {
+      cleanupObs = cleanup;
+    });
+
+    return () => {
+      cancelled = true;
+      if (typeof cleanupObs === "function") cleanupObs();
+      log("🧹 [EmbedSocial] cleanup", { key });
+    };
+  }, [key, html, debug]);
+}

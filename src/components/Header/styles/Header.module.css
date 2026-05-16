@@ -1,0 +1,12 @@
+.header {
+   background-color: #CE212A;
+}
+
+.container {
+   max-width: 1425px;
+   margin: 0 auto;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 20px;
+}

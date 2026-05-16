@@ -1,0 +1,208 @@
+/* Fuentes cargadas como preload non-blocking en index.html */
+
+
+
+@font-face {
+    font-family: 'Archivo SemiCondensed Bold';
+    src: url('../public/fonts2/ArchivoSemiCondensed-Bold.eot');
+    src: url('../public/fonts2/ArchivoSemiCondensed-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../public/fonts2/ArchivoSemiCondensed-Bold.woff2') format('woff2'),
+        url('../public/fonts2/ArchivoSemiCondensed-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archivo Condensed ExtraBold';
+    src: url('../public/fonts2/ArchivoCondensed-ExtraBold.eot');
+    src: url('../public/fonts2/ArchivoCondensed-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('../public/fonts2/ArchivoCondensed-ExtraBold.woff2') format('woff2'),
+        url('../public/fonts2/ArchivoCondensed-ExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archivo SemiCondensed Medium';
+    src: url('../public/fonts2/ArchivoSemiCondensed-Medium.eot');
+    src: url('../public/fonts2/ArchivoSemiCondensed-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../public/fonts2/ArchivoSemiCondensed-Medium.woff2') format('woff2'),
+        url('../public/fonts2/ArchivoSemiCondensed-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archivo SemiCondensed ExtraBold';
+    src: url('../public/fonts2/ArchivoSemiCondensed-ExtraBold.eot');
+    src: url('../public/fonts2/ArchivoSemiCondensed-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('../public/fonts2/ArchivoSemiCondensed-ExtraBold.woff2') format('woff2'),
+        url('../public/fonts2/ArchivoSemiCondensed-ExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archivo Condensed Bold';
+    src: url('../public/fonts2/ArchivoCondensed-Bold.eot');
+    src: url('../public/fonts2/ArchivoCondensed-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../public/fonts2/ArchivoCondensed-Bold.woff2') format('woff2'),
+        url('../public/fonts2/ArchivoCondensed-Bold.woff') format('woff'),
+        url('../public/fonts2/ArchivoCondensed-Bold.ttf') format('truetype'),
+        url('../public/fonts2/ArchivoCondensed-Bold.svg#ArchivoCondensed-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archivo SemiCondensed';
+    src: url('../public/fonts2/ArchivoSemiCondensed-Regular.eot');
+    src: url('../public/fonts2/ArchivoSemiCondensed-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../public/fonts2/ArchivoSemiCondensed-Regular.woff2') format('woff2'),
+        url('../public/fonts2/ArchivoSemiCondensed-Regular.woff') format('woff'),
+        url('../public/fonts2/ArchivoSemiCondensed-Regular.ttf') format('truetype'),
+        url('../public/fonts2/ArchivoSemiCondensed-Regular.svg#ArchivoSemiCondensed-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+/* font */
+--font-primary: font-family: "Archivo", sans-serif;
+
+/* colors*/
+--color-white: #fff;
+--color-black: #000;
+--color-red: #CE2229;
+--color-grey1: #808080;
+--color-grey2: #949494;
+--color-yellow-milani: #FFC527;
+
+--header-height: 143px;
+}
+
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+
+html,body {
+background-color: #fff;
+font-family: var(--font-primary);
+}
+
+
+/* ============================================
+TITULOS SEGÚN TABLA OFICIAL DE FIGMA
+============================================ */
+
+/* H1 — Archivo Condensed ExtraBold — 85px — LH 1 */
+h1 {
+font-family: 'Archivo Condensed ExtraBold';
+font-weight: 800;
+font-size: 85px;
+line-height: 1;
+}
+
+/* H2 — Archivo Condensed ExtraBold — 54px */
+h2 {
+font-family: 'Archivo Condensed ExtraBold';
+font-weight: 800;
+font-size: 54px;
+line-height: 1.1;
+}
+
+/* H3 — Archivo SemiCondensed Medium — 40px */
+h3 {
+font-family: 'Archivo SemiCondensed Medium';
+font-weight: 500;
+font-size: 40px;
+line-height: 1.1;
+}
+
+/* H4 — Archivo SemiCondensed Bold — 30px */
+h4 {
+font-family: 'Archivo SemiCondensed Bold';
+font-weight: 700;
+font-size: 30px;
+line-height: 1.1;
+}
+
+/* H5 — Archivo SemiCondensed ExtraBold — 26px */
+h5 {
+font-family: 'Archivo Condensed ExtraBold';
+font-weight: 800;
+font-size: 26px;
+line-height: 1.1;
+}
+
+/* H6 — Archivo SemiCondensed ExtraBold — 21px */
+h6 {
+font-family: 'Archivo Condensed ExtraBold';
+font-weight: 800 ;
+font-size: 21px;
+line-height: 1.1;
+}
+
+
+/* ============================================
+PARRAFOS Y TIPOGRAFÍA BASE
+============================================ */
+
+
+p {
+font-family: var(--font-primary);
+font-weight: 400;
+}
+
+strong {
+font-family: var(--font-primary);
+font-weight: bold;
+}
+
+header ul {
+/* para los dropdown */
+margin: 0 !important;
+}
+
+li {
+list-style: none;
+}
+
+.location-btn__text p {
+padding-bottom: 0 !important;
+}
+
+/* 🔧 Fix para Salient / WPBakery responsivo */
+/* @media only screen and (max-width: 999px) {
+.container-wrap {
+min-width: auto !important;
+width: 100% !important;
+}
+} */
+
+/* 🩵 Fix para contenedores del theme Salient en headless React */
+.container,
+.container-wrap {
+width: 100% !important;
+/* max-width: 100% !important; */
+min-width: auto !important;
+}
+
+@media only screen and (max-width: 999px) {
+.container,
+.container-wrap {
+width: 100% !important;
+max-width: 100% !important;
+min-width: auto !important;
+}
+}

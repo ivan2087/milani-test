@@ -1,0 +1,7 @@
+.content {
+   /* border: 1px solid white; */
+   display: flex;
+   flex-direction: column;
+   /* color: var(--color-white); */
+   gap: 33px;
+}

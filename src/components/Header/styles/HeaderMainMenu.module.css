@@ -1,0 +1,46 @@
+.mainMenuContainer {
+   /* border: 1px solid blue; */
+   padding-bottom: .5rem;
+   display: flex;
+   justify-content: end;
+   gap: 19px;
+}
+
+.link-main {
+   position: relative;
+   color: var(--color-white);
+   text-decoration: none;
+   /* border: 1px solid white; */
+   display: flex;
+   align-items: center;
+}
+
+/* agrega el “pipe” a todos menos al último */
+.link-main:not(:last-child)::after {
+  content: "|";
+  margin-left: 19px;      /* espacio entre texto y pipe */
+  color: var(--color-white); /* evita heredar el color del enlace activo */
+}
+
+.active-main {
+   color: var(--color-yellow-milani );
+
+}
+
+/* Subrayado debajo del texto activo */
+.active-main::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;             /* ajusta según el tamaño de fuente */
+  left: 0;
+  width: 70%;
+  height: 3px;              /* grosor de la línea */
+  background-color: var(--color-yellow-milani);
+  border-radius: 2px;
+}
+
+
+/* Opcional: ocultar pipes en móvil */
+@media (max-width: 640px) {
+  .link-main:not(:last-child)::after { content: none; }
+}
